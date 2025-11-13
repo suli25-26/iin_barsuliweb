@@ -1,0 +1,73 @@
+<H2>Tanulók</H2>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+  Hozzáad
+</button>
+<table class="table table-striped table-info">
+    <thead>
+        <tr >
+            <th class="text-center">id</th>
+            <th class="text-center">Név</th>
+            <th class="text-center">Nem</th>
+            <th class="text-center">Csoport</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(st of students;track st.id){
+            <tr class="text-center">
+                <td>{{st.id}}</td>
+                <td>{{st.name}}</td>
+                <td>{{st.gender}}</td>
+                <td>{{st.group}}</td>
+                <td><button class="btn btn-danger" (click)="destroyStudent(st.id)">Törlés</button></td>
+            </tr>
+    }
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tanuló hozzáadása</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <form (ngSubmit)="createStudent()" [formGroup]="studentForm" id="studentForm">
+            <div>
+                <label class="form-label" for="id">
+                    id
+                </label>
+                <input class="form-control" id="id" formControlName="id" readonly>
+            </div>
+            <div>
+                <label class="form-label" for="name">
+                    name
+                </label>
+                <input class="form-control" id="name" formControlName="name">
+            </div>
+            <div>
+                <label class="form-label" for="gender">
+                    gender
+                </label>
+                <input class="form-control" id="gender" formControlName="gender">
+            </div>
+            <div>
+                <label class="form-label" for="group">
+                    group
+                </label>
+                <input class="form-control" id="group" formControlName="group">
+            </div>
+            <!-- <button type="submit">Mentés</button> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" form="studentForm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
