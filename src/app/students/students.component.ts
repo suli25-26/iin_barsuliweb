@@ -12,7 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class StudentsComponent {
   students:any;
-  studentForm!:FormGroup ;
+  studentForm!:FormGroup;
+  addMode=true;
   constructor(private api: StudentsapiService, private builder: FormBuilder){}
 
   ngOnInit(){
@@ -101,6 +102,27 @@ export class StudentsComponent {
       }
     }
     )
+  }
+  startEditStudent(student:any){
+    this.addMode=false;
+    console.log(student)
+    this.studentForm.patchValue(student)
+
+  }
+  startUpdateStudent(){
+    this.api.updateStudent$(this.studentForm.value).subscribe({
+      next:(res:any)=>{
+        console.log(res.data);
+        this.getStudent();
+      }
+    })
+  }
+  startOperation(){
+    if(this.addMode){
+      this.createStudent()
+    }else{
+      this.startUpdateStudent()
+    }
   }
 
 }

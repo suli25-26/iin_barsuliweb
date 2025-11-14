@@ -16,8 +16,8 @@ export class StudentsapiService {
     
     return this.http.post(this.url,student)
   }
-  updateStudent$(student:any,id:number){
-    const url=this.url+"/"+id
+  updateStudent$(student:any){
+    const url=this.url+"/"+student.id
     return this.http.put(url,student)
   }
   destroyStudent$(id:number){

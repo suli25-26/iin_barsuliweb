@@ -1,0 +1,4 @@
+TODO: score komponensben backendhez igazítás
+TODO: módosításnál reset
+TODO: módosításnál siker párbeszédablak
+TODO: score CRUD műveletek

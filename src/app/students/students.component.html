@@ -21,6 +21,7 @@
                 <td>{{st.gender}}</td>
                 <td>{{st.group}}</td>
                 <td><button class="btn btn-danger" (click)="startDestroyStudent(st.id)">Törlés</button></td>
+                <td><button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="startEditStudent(st)">Módosítás</button></td>
             </tr>
     }
     </tbody>
@@ -32,17 +33,19 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tanuló hozzáadása</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">@if(addMode) {Tanuló hozzáadása}@else {Tanuló módosítása}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-         <form (ngSubmit)="createStudent()" [formGroup]="studentForm" id="studentForm">
+         <form (ngSubmit)="startOperation()" [formGroup]="studentForm" id="studentForm">
+            @if (!addMode) {
             <div>
                 <label class="form-label" for="id">
                     id
                 </label>
                 <input class="form-control" id="id" formControlName="id" readonly>
             </div>
+        }
             <div>
                 <label class="form-label" for="name">
                     name
@@ -66,7 +69,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" form="studentForm">Save changes</button>
+        <button type="submit" class="btn btn-primary" form="studentForm">@if(addMode){Mentés}@else {Módosítás}</button>
       </div>
     </div>
   </div>
