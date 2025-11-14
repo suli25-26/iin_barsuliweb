@@ -5,22 +5,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StudentsapiService {
+  url='http://localhost:8000/api/students'
 
   constructor(private http:HttpClient) { }
   getstudents$(){
-    const url='http://localhost:3000/students'
-    return this.http.get(url)
+    
+    return this.http.get(this.url)
   }
   createStudent$(student:any){
-    const url='http://localhost:3000/students'
-    return this.http.post(url,student)
+    
+    return this.http.post(this.url,student)
   }
   updateStudent$(student:any,id:number){
-    const url='http://localhost:3000/students/'+id
+    const url=this.url+"/"+id
     return this.http.put(url,student)
   }
   destroyStudent$(id:number){
-    const url='http://localhost:3000/students/'+id
+    const url=this.url+"/"+id
     return this.http.delete(url)
   }
 }
